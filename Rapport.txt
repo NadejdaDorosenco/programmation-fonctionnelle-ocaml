@@ -1,0 +1,54 @@
+1) Fonctionnalités : 
+
+_ "read_polish" : Transforme la syntaxe concrète (Polish) en syntaxe abstraite (ocaml)
+_ "print_polish" : Transforme la syntaxe abstraite (ocaml) en syntaxe concrète (Polish), 
+puis affichage du code obtenu
+_ "eval_polish" : Evalue le programme (ocaml)
+_ "simpl_polish" : Simplifie le programme et élimine les blocs morts (ocaml)
+_ "vars_polish" : Affiche une première ligne avec toutes les variables du programme puis 
+				sur une deuxième les variables risquant d'être accédés avant d'être écrites.
+_ "sign_polish" : Affiche le signe possible de chaque variable grace à une analyse statique. 
+
+2) Compilation : make
+
+Exécution : ./run -<option> <Nom du fichier> 
+
+	options disponibles : 
+		./run -reprint exemples/<Nom du fichier>
+		./run -eval exemples/<Nom du fichier>
+		./run -simpl exemples/<Nom du fichier>
+		./run -vars exemples/<Nom du fichier>
+		./run -sign exemples/<Nom du fichier>
+
+Rappel de ce que font les options : 
+
+-reprint : Réaffiche le programme. 
+Les instructions de type PRINT ne sont pas exécutées, elles sont simplement réaffichées dans leur forme originale.  
+Les commentaires (COMMENT) ne sont pas représentés dans la syntaxe abstraite et ne sont donc pas réaffichés.   
+
+-eval : Évalue le programme. 
+Les instructions PRINT affichent le résultat de l'expression sur la sortie standard.  
+Les instructions READ demandent à l'utilisateur de saisir une valeur, et cette valeur est utilisée dans le programme.  
+Les variables sont manipulées en respectant leur portée et leur cycle de vie.  
+
+-simpl : Propage les constantes, élimine le code mort, réaffiche le programme simplifié.  
+
+-vars : Affiche toutes les variables, identifie celles non initialisées avant utilisation.  
+
+-sign : Détermine les signes possibles des variables, vérifie les risques de division par zéro.
+
+3) Découpage modulaire : 
+
+Module Types : Contient tous les types créés qui sont réutilisés ensuite dans tous les autres modules
+
+Module Read_polish : Contient toutes les méthodes nécessaires pour la fonction read_polish (ainsi que la méthode read_polish elle-même)
+
+Module Print_polish : Contient toutes les méthodes nécessaires pour la fonction print_polish (ainsi que la méthode print_polish elle-même)
+
+Module Eval_polish : Contient toutes les méthodes nécessaires pour la fonction eval_polish (ainsi que la méthode eval_polish elle-même)
+
+Module Simpl_polish : Contient toutes les méthodes nécessaires pour la fonction simpl_polish (ainsi que la méthode simpl_polish elle-même)
+
+Module Vars_polish : Contient toutes les méthodes nécessaires pour la fonction vars_polish (ainsi que la méthode vars_polish elle-même)
+
+Module Sign_polish : Contient toutes les méthodes nécessaires pour la fonction sign_polish (ainsi que la méthode sign_polish elle-même)
